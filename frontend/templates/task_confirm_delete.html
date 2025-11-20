@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Delete Task</h1>
+<p>Are you sure you want to delete "{{ selected_task.title }}"?</p>
+<form method="post">{% csrf_token %}
+  <button type="submit" class="btn btn-danger btn-sm">Yes, Delete</button>
+</form>
+<a href="{% url 'task_list' %}" class="btn btn-primary btn-sm" style="margin-top: 10px;" >Cancel</a>
+{% endblock %}

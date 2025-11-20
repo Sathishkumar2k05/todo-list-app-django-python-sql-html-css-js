@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <a href="{% url 'task_create' %}" class="btn btn-sm btn-primary" style="margin-bottom: 5px;">Write Task</a>
+    <div class="row">
+
+        {% for task in tasks %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 rounded-5">
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <h5 class="card-title">{{ task.title }}</h5>
+
+                    <!-- Status Badge -->
+                    {% if task.completed %}
+                        <span class="badge bg-success">Completed</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% endif %}
+
+                    <hr>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'task_update' task.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'task_delete' task.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{% if form.instance.pk %}Edit{% else %}Write{% endif %} Task</h1>
+<form method="post">{% csrf_token %}
+  {{ task_form.as_p }}
+  <button type="submit" class="btn btn-success btn-sm" style="margin-bottom: 10px;">Save</button>
+</form>
+<a href="{% url 'task_list' %}" class="btn btn-primary btn-sm">Back</a>
+{% endblock %}

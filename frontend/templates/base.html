@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dark Light Toggle</title>
+
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  
+  <style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body.light {
+    background: #f5f5f5;
+    color: #222;
+  }
+
+  body.dark {
+    background: #1a1a1a;
+    color: #f5f5f5;
+  }
+
+  .toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+
+  body.dark .toggle-btn {
+    background: #444;
+    color: #fff;
+  }
+
+  body {
+    margin: 50px;
+    padding: 0;
+    font-family: Arial;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* Default Light Mode */
+  body.light {
+    background: #f5f5f5;
+    color: #222;
+  }
+
+  /* Dark Mode */
+  body.dark {
+    background: #1a1a1a;
+    color: #f5f5f5;
+  }
+
+  /* Toggle Button */
+  .toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+
+  /* Moon Style in Dark Mode */
+  body.dark .toggle-btn {
+    background: #444;
+    color: #fff;
+  }
+
+/* -----------------------------
+   CARD THEME LOGIC
+------------------------------ */
+
+/* Light Mode → Dark Card */
+body.light .card {
+  background-color: #2b2b2b !important;   /* dark card */
+  color: #ffffff !important;              /* white text */
+}
+
+/* Titles in light mode (dark card) */
+body.light .card-title {
+  color: #ffffff !important;
+}
+
+/* Body text */
+body.light .card-body {
+  color: #ffffff !important;
+}
+
+/* Dark Mode → Light Card */
+body.dark .card {
+  background-color: #ffffff !important;   /* white card */
+  color: #000000 !important;              /* black text */
+}
+
+/* Titles in dark mode (white card) */
+body.dark .card-title {
+  color: #000000 !important;
+}
+
+body.dark .card-body {
+  color: #000000 !important;
+}
+
+  </style>
+
+</head>
+<body class="light">
+
+<button class="toggle-btn" id="themeToggle">☀</button>
+
+{% block content %}
+
+{% endblock %}
+<script>
+const body = document.body;
+const toggleBtn = document.getElementById("themeToggle");
+
+// Load saved theme
+if (localStorage.getItem("theme")) {
+  body.className = localStorage.getItem("theme");
+  toggleBtn.textContent = body.classList.contains("dark") ? "🌙" : "☀";
+}
+
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  body.classList.toggle("light");
+
+  // Change icon
+  toggleBtn.textContent = body.classList.contains("dark") ? "🌙" : "☀";
+
+  // Save theme
+  localStorage.setItem("theme", body.className);
+});
+</script>
+
+</body>
+</html>
+
